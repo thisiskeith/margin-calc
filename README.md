@@ -14,7 +14,7 @@ Gross margin percentage
 margincalc.grossMarginPercentage(revenue, cost[, precision]);
 ```
 
-Makr up percentage
+Mark up percentage
 ```js
 margincalc.markUpPercentage(revenue, cost[, precision]);
 ```
