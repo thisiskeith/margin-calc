@@ -2,16 +2,19 @@
 
 Utility for calculating gross profit, gross margin percentage, and markup percentage
 
-## Examples
+## Usage
 
+Gross profit
 ```js
 margincalc.grossProfit(revenue, cost);
 ```
 
+Gross margin percentage
 ```js
 margincalc.grossMarginPercentage(revenue, cost[, precision]);
 ```
 
+Mark up percentage
 ```js
 margincalc.markUpPercentage(revenue, cost[, precision]);
 ```
