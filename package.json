@@ -4,7 +4,8 @@
   "description": "Utility for calculating gross profit, gross margin percentage, and markup percentage",
   "main": "margincalc.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint margincalc.js",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/thisiskeith/margin-calc/issues"
   },
-  "homepage": "https://github.com/thisiskeith/margin-calc"
+  "homepage": "https://github.com/thisiskeith/margin-calc",
+  "devDependencies": {
+    "jest-cli": "^0.4.0",
+    "eslint": "^0.17.1"
+  }
 }
