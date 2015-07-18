@@ -26,4 +26,13 @@ margincalc.markUpPercentage = function (revenue, cost, precision) {
     return m;
 };
 
+margincalc.revenueFromGmPercentage = function (gmPercentage, cost, precision) {
+
+    precision = precision || 2;
+
+    var revenue = parseFloat(((100 * cost)/(100 - gmPercentage)).toFixed(precision));
+
+    return revenue;
+};
+
 module.exports = margincalc;
