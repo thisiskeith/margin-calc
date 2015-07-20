@@ -2,123 +2,98 @@
 
 var margincalc = {};
 
-function validate(obj) {
-    // returns validation result object
-    var result = {
-        valid: true,
-        message: ''
-    };
+margincalc.validate = function (obj) {
+    // returns true if valid
+
+    var EX_PREFIX = 'margin-calc exception: ';
 
     // throws immediately if obj input is not correct
-    if (!obj) {
-        throw 'margin-calc exception: No validation data received.';
-    }
-    if (typeof obj !== 'object') {
-        throw 'margin-calc exception: Validation input must be an object.';
+    if (!obj || typeof obj !== 'object') {
+        throw new Error(EX_PREFIX + 'Validation input must be an object.');
+        return false;
     }
 
     // grossMargin must be < 100%
     if (obj.grossMargin && parseFloat(obj.grossMargin) >= 100) {
-        result.valid = false;
-        result.message += 'margin-calc exception: Gross margin entered must be less than 100%. ';
+        throw new Error(EX_PREFIX + 'Gross margin entered must be less than 100%.');
+        return false;
     }
     // revenue and cost must be > 0
     if (obj.cost && parseFloat(obj.cost) <= 0) {
-        result.valid = false;
-        result.message += 'margin-calc exception: Cost entered must be greater than 0. ';
+        throw new Error(EX_PREFIX + 'Cost entered must be greater than 0.');
+        return false;
     }
     if (obj.revenue && parseFloat(obj.revenue) <= 0) {
-        result.valid = false;
-        result.message += 'margin-calc exception: Revenue entered must be greater than 0.';
+        throw new Error(EX_PREFIX + 'Revenue entered must be greater than 0.');
+        return false;
     }
 
-    return result;
-}
+    return true;
+};
 
 margincalc.grossProfit = function (revenue, cost) {
     try {
-        var testData = validate({
+        this.validate({
             revenue: revenue,
             cost: cost
         });
     } catch (e) {
-        if (console && console.error) {
-            console.error(e);
-        }
-    }
-
-    if (!testData.valid && testData.message) {
-        throw testData.message;
+        throw new Error(e.message);
     }
     return revenue - cost;
 };
 
 margincalc.grossMarginPercentage = function (revenue, cost, precision) {
+    var p, g;
     try {
-        var testData = validate({
+        this.validate({
             revenue: revenue,
             cost: cost
         });
     } catch (e) {
-        if (console && console.error) {
-            console.error(e);
-        }
-    }
-
-    if (!testData.valid && testData.message) {
-        throw testData.message;
+        throw new Error(e.message);
     }
     precision = precision || 2;
 
-    var p = this.grossProfit(revenue, cost);
-    var g = parseFloat((p / revenue * 100).toFixed(precision));
+    p = this.grossProfit(revenue, cost);
+    g = parseFloat((p / revenue * 100).toFixed(precision));
 
     return g;
 };
 
 margincalc.markUpPercentage = function (revenue, cost, precision) {
+    var p, m;
     try {
-        var testData = validate({
+        this.validate({
             revenue: revenue,
             cost: cost
         });
     } catch (e) {
-        if (console && console.error) {
-            console.error(e);
-        }
-    }
-
-    if (!testData.valid && testData.message) {
-        throw testData.message;
+        throw new Error(e.message);
     }
 
     precision = precision || 2;
 
-    var p = this.grossProfit(revenue, cost);
-    var m = parseFloat(((p / cost) * 100).toFixed(precision));
+    p = this.grossProfit(revenue, cost);
+    m = parseFloat(((p / cost) * 100).toFixed(precision));
 
     return m;
 };
 
 margincalc.revenueFromGrossMarginPercentage = function (gmPercentage, cost, precision) {
+    var revenue;
     try {
-        var testData = validate({
+        this.validate({
             grossMargin: gmPercentage,
             cost: cost
         });
     } catch (e) {
-        if (console && console.error) {
-            console.error(e);
-        }
-    }
-
-    if (!testData.valid && testData.message) {
-        throw testData.message;
+        throw new Error(e.message);
     }
 
     precision = precision || 2;
 
-    var revenue = parseFloat(((100 * cost) / (100 - gmPercentage)).toFixed(precision));
+    revenue = parseFloat(((100 * cost) / (100 - gmPercentage)).toFixed(precision));
 
     return revenue;
 };
