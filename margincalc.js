@@ -42,7 +42,9 @@ margincalc.grossProfit = function (revenue, cost) {
             cost: cost
         });
     } catch (e) {
-        console.log(e);
+        if (console && console.error) {
+            console.error(e);
+        }
     }
 
     if (!testData.valid && testData.message) {
@@ -58,7 +60,9 @@ margincalc.grossMarginPercentage = function (revenue, cost, precision) {
             cost: cost
         });
     } catch (e) {
-        console.log(e);
+        if (console && console.error) {
+            console.error(e);
+        }
     }
 
     if (!testData.valid && testData.message) {
@@ -79,7 +83,9 @@ margincalc.markUpPercentage = function (revenue, cost, precision) {
             cost: cost
         });
     } catch (e) {
-        console.log(e);
+        if (console && console.error) {
+            console.error(e);
+        }
     }
 
     if (!testData.valid && testData.message) {
@@ -101,7 +107,9 @@ margincalc.revenueFromGrossMarginPercentage = function (gmPercentage, cost, prec
             cost: cost
         });
     } catch (e) {
-        console.log(e);
+        if (console && console.error) {
+            console.error(e);
+        }
     }
 
     if (!testData.valid && testData.message) {
