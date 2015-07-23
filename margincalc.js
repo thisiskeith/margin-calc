@@ -48,18 +48,15 @@ margincalc.validate = function (obj) {
     }
 
     for (i in obj) {
+        j = 0;
         if (obj.hasOwnProperty(i)) {
-            if (config.hasOwnProperty(i)) {
-                l = config[i].length;
-                for (j = 0; j < l; j++) {
-                    if (tests[config[i][j]]) {
-                        tests[config[i][j]](i, obj[i]);
-                    } else {
-                        throw new Error(EX_PREFIX + i + ' missing test from validation tests.');
-                    }
+            l = config[i].length;
+            for (; j < l; j += 1) {
+                if (tests[config[i][j]]) {
+                    tests[config[i][j]](i, obj[i]);
+                } else {
+                    throw new Error(EX_PREFIX + i + ' missing test from validation tests.');
                 }
-            } else {
-                throw new Error(EX_PREFIX + i + ' missing from validation config.');
             }
         }
     }
