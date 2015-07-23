@@ -5,41 +5,61 @@ var margincalc = {};
 margincalc.validate = function (obj) {
     // returns true if valid
 
-    var EX_PREFIX = 'margin-calc exception: ';
+    var EX_PREFIX = 'margin-calc exception: ',
+        config = {
+            cost: [
+                'canCalculate',
+                'greaterThanZero'],
+            revenue: [
+                'canCalculate',
+                'greaterThanZero'],
+            grossMargin: [
+                'canCalculate',
+                'lessThan100']
+        },
+        tests = {
+            canCalculate: function (property, val) {
+                // property passed and must not be undefined, null, or NaN
+                if (typeof val === 'undefined' ||
+                     val === null ||
+                     val.length <= 0 ||
+                     val != val) {
+                    throw new Error(EX_PREFIX + property + ' must be a number.');
+                }
+            },
+            greaterThanZero: function (property, val) {
+                // cost or revenue must be > 0
+                if (parseFloat(val) <= 0) {
+                    throw new Error(EX_PREFIX + property + ' entered must be greater than 0.');
+                }
+            },
+            lessThan100: function (property, val) {
+                // gross margin must be < 100%
+                if (parseFloat(val) >= 100) {
+                    throw new Error(EX_PREFIX + property + ' entered must be less than 100%.');
+                }
+            }
+        },
+        i, j, l;
 
     // throws immediately if obj input is not correct
     if (!obj || typeof obj !== 'object') {
-        throw new Error(EX_PREFIX + 'Validation input must be an object.');
+        throw new Error(EX_PREFIX + ' Validation input must be an object.');
     }
 
-    var config = [
-        {name: 'cost', rule: 1, label: 'Cost'},
-        {name: 'revenue', rule: 1, label: 'Revenue'},
-        {name: 'grossMargin', rule: 2, label: 'Gross margin'}];
-
-    var i,
-        l = config.length;
-
-    for (i = 0; i < l; i ++) {
-        if (obj.hasOwnProperty(config[i].name)) {
-            // property passed and must not be undefined, null, or NaN
-            if (typeof obj[config[i].name] === 'undefined' ||
-                 obj[config[i].name] === null ||
-                 obj[config[i].name].length <= 0 ||
-                 obj[config[i].name] != obj[config[i].name]) {
-                throw new Error(EX_PREFIX + config[i].label + ' must be a number.');
-            }
-            if (config[i].rule === 1) {
-                // cost or revenue must be > 0
-                if (parseFloat(obj[config[i].name]) <= 0) {
-                    throw new Error(EX_PREFIX + config[i].label + ' entered must be greater than 0.');
+    for (i in obj) {
+        if (obj.hasOwnProperty(i)) {
+            if (config.hasOwnProperty(i)) {
+                l = config[i].length;
+                for (j = 0; j < l; j++) {
+                    if (tests[config[i][j]]) {
+                        tests[config[i][j]](i, obj[i]);
+                    } else {
+                        throw new Error(EX_PREFIX + i + ' missing test from validation tests.');
+                    }
                 }
-            }
-            if (config[i].rule === 2) {
-                // gross margin must be < 100%
-                if (parseFloat(obj[config[i].name]) >= 100) {
-                    throw new Error(EX_PREFIX + config[i].label + ' entered must be less than 100%.');
-                }
+            } else {
+                throw new Error(EX_PREFIX + i + ' missing from validation config.');
             }
         }
     }
