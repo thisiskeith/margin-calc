@@ -5,27 +5,60 @@ var margincalc = {};
 margincalc.validate = function (obj) {
     // returns true if valid
 
-    var EX_PREFIX = 'margin-calc exception: ';
+    var EX_PREFIX = 'margin-calc exception: ',
+        config = {
+            cost: [
+                'canCalculate',
+                'greaterThanZero'],
+            revenue: [
+                'canCalculate',
+                'greaterThanZero'],
+            grossMargin: [
+                'canCalculate',
+                'lessThan100']
+        },
+        tests = {
+            canCalculate: function (property, val) {
+                // property passed and must not be undefined, null, or NaN
+                if (typeof val === 'undefined' ||
+                     val === null ||
+                     val.length <= 0 ||
+                     val != val) {
+                    throw new Error(EX_PREFIX + property + ' must be a number.');
+                }
+            },
+            greaterThanZero: function (property, val) {
+                // cost or revenue must be > 0
+                if (parseFloat(val) <= 0) {
+                    throw new Error(EX_PREFIX + property + ' entered must be greater than 0.');
+                }
+            },
+            lessThan100: function (property, val) {
+                // gross margin must be < 100%
+                if (parseFloat(val) >= 100) {
+                    throw new Error(EX_PREFIX + property + ' entered must be less than 100%.');
+                }
+            }
+        },
+        i, j, l;
 
     // throws immediately if obj input is not correct
     if (!obj || typeof obj !== 'object') {
-        throw new Error(EX_PREFIX + 'Validation input must be an object.');
-        return false;
+        throw new Error(EX_PREFIX + ' Validation input must be an object.');
     }
 
-    // grossMargin must be < 100%
-    if (obj.grossMargin && parseFloat(obj.grossMargin) >= 100) {
-        throw new Error(EX_PREFIX + 'Gross margin entered must be less than 100%.');
-        return false;
-    }
-    // revenue and cost must be > 0
-    if (obj.cost && parseFloat(obj.cost) <= 0) {
-        throw new Error(EX_PREFIX + 'Cost entered must be greater than 0.');
-        return false;
-    }
-    if (obj.revenue && parseFloat(obj.revenue) <= 0) {
-        throw new Error(EX_PREFIX + 'Revenue entered must be greater than 0.');
-        return false;
+    for (i in obj) {
+        j = 0;
+        if (obj.hasOwnProperty(i)) {
+            l = config[i].length;
+            for (; j < l; j += 1) {
+                if (tests[config[i][j]]) {
+                    tests[config[i][j]](i, obj[i]);
+                } else {
+                    throw new Error(EX_PREFIX + i + ' missing test from validation tests.');
+                }
+            }
+        }
     }
 
     return true;
