@@ -17,7 +17,9 @@ margincalc.validate = function (obj) {
         {name: 'revenue', rule: 1, label: 'Revenue'},
         {name: 'grossMargin', rule: 2, label: 'Gross margin'}];
 
-    for (var i in config) {
+    var i;
+
+    for (i in config) {
         if (obj.hasOwnProperty(config[i].name)) {
             // property passed and must not be undefined, null, or NaN
             if (typeof obj[config[i].name] === 'undefined' ||
