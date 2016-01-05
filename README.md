@@ -23,17 +23,13 @@ margincalc.markUpPercentage(revenue, cost[, precision]);
 
 The easiest way to get started is to add the following to your `package.json` dependencies
 ```js
-{
-    "dependencies": {
-        "margin-calc": "git+ssh://git@github.com:thisiskeith/margin-calc.git",
-    }
-}
-```
-Install the package
-```js
-npm install
+npm i margin-calc -S
 ```
 Require in your application
 ```
-var margincalc = require('margin-calc');
+// ES5
+var MarginCalc = require('margin-calc');
+
+// ES6
+import MarginCalc from 'margin-calc';
 ```
