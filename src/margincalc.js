@@ -153,7 +153,7 @@ class MarginCalc {
 }
 
 MarginCalc.tests = {
-    isFinite: (value) => typeof value === "number" && isFinite(value),
+    isFinite: (value) => typeof value === 'number' && isFinite(value),
     zeroOrGreater: (value) => value > -1,
 };
 
