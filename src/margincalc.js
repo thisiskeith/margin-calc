@@ -22,15 +22,15 @@ class MarginCalc {
         }
 
         const grossProfit = MarginCalc.grossProfit(revenue, cost);
-        let grossMarginPercentage = parseFloat((grossProfit / revenue * 100)
+        let grossMargin = parseFloat((grossProfit / revenue * 100)
             .toFixed(precision));
 
         // Return 0 when not finite
-        if (!isFinite(grossMarginPercentage)) {
-            grossMarginPercentage = 0;
+        if (!isFinite(grossMargin)) {
+            grossMargin = 0;
         }
 
-        return grossMarginPercentage;
+        return grossMargin;
     }
 
     /**
@@ -51,9 +51,9 @@ class MarginCalc {
             throw new Error(e.message);
         }
 
-        const grossProfit = revenue - cost;
+        const profit = revenue - cost;
 
-        return grossProfit;
+        return profit;
     }
 
     /**
@@ -76,15 +76,15 @@ class MarginCalc {
         }
 
         const grossProfit = MarginCalc.grossProfit(revenue, cost);
-        let markUpPercentage = parseFloat(((grossProfit / cost) * 100)
+        let markUp = parseFloat(((grossProfit / cost) * 100)
             .toFixed(precision));
 
         // Return 0 when not finite
-        if (!isFinite(markUpPercentage)) {
-            markUpPercentage = 0;
+        if (!isFinite(markUp)) {
+            markUp = 0;
         }
 
-        return markUpPercentage;
+        return markUp;
     }
 
     /**
