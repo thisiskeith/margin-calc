@@ -1,4 +1,4 @@
-# margin-calc [![Circle CI](https://circleci.com/gh/thisiskeith/margin-calc.svg?style=svg)](https://circleci.com/gh/thisiskeith/margin-calc)
+# margin-calc [![Circle CI](https://circleci.com/gh/thisiskeith/margin-calc.svg?style=shield)](https://circleci.com/gh/thisiskeith/margin-calc)
 
 Utility for calculating gross profit, gross margin percentage, and markup percentage
 
