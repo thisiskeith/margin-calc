@@ -1,3 +1,4 @@
 test:
   override:
-      - ./node_modules/.bin/babel-node ./node_modules/.bin/babel-istanbul cover ./test && cat ./coverage/lcov.info | ./node_modules/.bin/codecov --verbose
+    - ./node_modules/.bin/babel-istanbul cover ./node_modules/mocha/bin/_mocha -- -R spec \
+      && cat ./coverage/coverage.json | ./node_modules/codecov.io/bin/codecov.io.js
