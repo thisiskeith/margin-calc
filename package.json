@@ -2,7 +2,7 @@
   "name": "margin-calc",
   "version": "0.1.3",
   "description": "Utility for calculating gross profit, gross margin percentage, and markup percentage",
-  "main": "margincalc.js",
+  "main": "./lib/margincalc.js",
   "scripts": {
     "build": "babel src -d lib",
     "lint": "eslint margincalc.js",
