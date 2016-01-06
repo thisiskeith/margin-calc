@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/thisiskeith/margin-calc",
   "devDependencies": {
+    "babel": "^6.3.26",
     "babel-cli": "^6.3.17",
     "babel-preset-es2015": "^6.3.13",
     "chai": "^3.4.1",
