@@ -18,6 +18,9 @@
   "bugs": {
     "url": "https://github.com/thisiskeith/margin-calc/issues"
   },
+  "babel": {
+    "presets": ["es2015"]
+  },
   "homepage": "https://github.com/thisiskeith/margin-calc",
   "devDependencies": {
     "babel": "^5.8.34",
