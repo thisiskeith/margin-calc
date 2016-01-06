@@ -21,6 +21,7 @@
   "homepage": "https://github.com/thisiskeith/margin-calc",
   "devDependencies": {
     "babel": "^5.8.34",
+    "babel-core": "^6.3.26",
     "babel-eslint": "^4.0.5",
     "babel-istanbul": "^0.5.9",
     "chai": "^3.4.1",
