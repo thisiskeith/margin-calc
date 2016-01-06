@@ -1,6 +1,6 @@
 {
   "name": "margin-calc",
-  "version": "0.1.3",
+  "version": "0.2.0",
   "description": "Utility for calculating gross profit, gross margin percentage, and markup percentage",
   "main": "./lib/margincalc.js",
   "scripts": {
