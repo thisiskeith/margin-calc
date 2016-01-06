@@ -4,7 +4,7 @@
   "description": "Utility for calculating gross profit, gross margin percentage, and markup percentage",
   "main": "./lib/margincalc.js",
   "scripts": {
-    "build": "babel src -d lib",
+    "build": "npm run babel src -d lib",
     "lint": "eslint margincalc.js",
     "prepublish": "npm run build",
     "test": "mocha --recursive --compilers js:babel/register"
